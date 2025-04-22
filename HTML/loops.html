@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JAVA Programming - LOOPS</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            margin: 0.5em 0;
+        }
+
+        h3 a {
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        h3 a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 85%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: #f1f1f1;
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        th {
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                width: 95%;
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+
+            h1, h2, h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>JAVA Programming - LOOPS</h1>
+<h2>Gaurav KUMAR<br>CSE Second Year (2023–27)</h2>
+<h3>Section A<br>
+    <a href="index.html">← Back to Homepage</a>
+</h3>
+
+<table id="data-table">
+    <thead>
+        <tr>
+            <th>SL. NO.</th>
+            <th>Program Name</th>
+            <th>Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Data will be populated here -->
+    </tbody>
+</table>
+
+<script>
+    fetch('lodata.json')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.querySelector('#data-table tbody');
+            data.forEach((item, index) => {
+                const row = document.createElement('tr');
+
+                const slCell = document.createElement('td');
+                slCell.textContent = index + 1;
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = item.pname;
+
+                const linkCell = document.createElement('td');
+                const link = document.createElement('a');
+                link.href = item.plink.startsWith('http') ? item.plink : 'https://' + item.plink;
+                link.target = '_blank';
+                link.textContent = "Click HERE";
+                linkCell.appendChild(link);
+
+                row.appendChild(slCell);
+                row.appendChild(nameCell);
+                row.appendChild(linkCell);
+
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error loading JSON:', error));
+</script>
+
+</body>
+</html>
